@@ -1,8 +1,12 @@
 import time
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route('/time')
-def get_current_time():
-    return {'time': time.time()}
+@app.route('/get_definitions')
+def get_definitions():
+    definitions = {
+        'forest': 'collection of trees',
+        'movies': 'includes storyline and characters',
+    }
+    return jsonify(definitions)
