@@ -52,7 +52,7 @@ function FileUploadComponent() {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
+      <Button variant="contained" onClick={handleOpen} sx={{ backgroundColor: '#31416b', color: 'white' }}>
         Upload File
       </Button>
       <Modal open={open} onClose={handleClose}>
@@ -78,7 +78,7 @@ function FileUploadComponent() {
               variant="contained"
               component="label"
               fullWidth
-              sx={{ mb: 2 }}
+              sx={{ mb: 2 , backgroundColor: "#31416b"}}
             >
               Choose File
               <VisuallyHiddenInput
@@ -93,7 +93,7 @@ function FileUploadComponent() {
                 name: 'vocab-count',
                 id: 'vocab-count-native',
               }}
-              sx={{ mt: 2, width: '100%' }}
+              sx={{ my: 2, mb: 4, width: '100%' }}
             >
               <option value={5}>5</option>
               <option value={10}>10</option>
@@ -106,6 +106,7 @@ function FileUploadComponent() {
               color="primary"
               fullWidth
               disabled={!file}
+              sx={{backgroundColor: '#31416b'}}
             >
               Upload
             </Button>
