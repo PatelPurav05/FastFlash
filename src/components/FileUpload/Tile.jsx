@@ -19,7 +19,7 @@ function Tile({ word, definition }) {
                 </div>
                     {/* Back Side */}
                 <div
-                    className={`absolute inset-0 bg-yellow-50 rounded-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl p-4 flex items-center justify-center ${flipped ? 'block' : 'hidden'}`}
+                    className={`absolute inset-0 bg-lime-50 rounded-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl p-4 flex items-center justify-center ${flipped ? 'block' : 'hidden'}`}
                 >
                     <p className="text-gray-800 text-sm">{definition}</p>
                 </div>
