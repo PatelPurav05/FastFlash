@@ -7,7 +7,7 @@ import { Auth } from './components/auth';
 
 function App() {
   return (
-    <div className="App bg-gradient-to-r from-blue-400 to-purple-400 h-screen">
+    <div className="App bg-gradient-to-r from-emerald-200 to-emerald-400 h-full">
       <Navbar />
       <header className="App-header">
         <FileUploadComponent />

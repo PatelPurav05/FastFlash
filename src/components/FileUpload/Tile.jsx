@@ -13,16 +13,17 @@ function Tile({ word, definition }) {
             >
                 {/* Front Side */}
                 <div
-                    className={`absolute inset-0 bg-green-100 rounded-lg shadow-md p-4 flex items-center justify-center ${flipped ? 'hidden' : 'block'}`}
+                    className={`absolute inset-0 bg-yellow-50 rounded-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl flex items-center justify-center ${flipped ? 'hidden' : 'block'}`}
                 >
-                    <h3 className="text-gray-700 text-lg font-semibold">{word}</h3>
+                    <h3 className="text-gray-800 text-lg font-semibold">{word}</h3>
                 </div>
-                {/* Back Side */}
+                    {/* Back Side */}
                 <div
-                    className={`absolute inset-0 bg-green-200 rounded-lg shadow-md p-4 flex items-center justify-center ${flipped ? 'block' : 'hidden'}`}
+                    className={`absolute inset-0 bg-yellow-50 rounded-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl p-4 flex items-center justify-center ${flipped ? 'block' : 'hidden'}`}
                 >
-                    <p className="text-gray-700 text-sm">{definition}</p>
+                    <p className="text-gray-800 text-sm">{definition}</p>
                 </div>
+
             </div>
         </div>
     );
