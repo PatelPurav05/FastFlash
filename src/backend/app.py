@@ -17,7 +17,6 @@ if not os.path.exists(TEMP_UPLOAD_FOLDER):
     os.makedirs(TEMP_UPLOAD_FOLDER)
 
 genai.configure(api_key=os.environ["API_KEY"])
-myfile = genai.upload_file("D:\Documents\Projects\FastFlash\\fast-flash\src\\backend\\testfile.pdf")
 model = genai.GenerativeModel('gemini-1.5-flash',
                               # Set the `response_mime_type` to output JSON
                               # Pass the schema object to the `response_schema` field
@@ -34,8 +33,8 @@ def get_definitions():
     }
     return jsonify(definitions)
 
-@app.route('/get_gemini_response', methods=['POST'])
-def get_gemini_response():
+@app.route('/get_gemini_response/<int:count>', methods=['POST'])
+def get_gemini_response(count):
     file = request.files['file']
     if file:
         # Secure the filename
@@ -49,7 +48,7 @@ def get_gemini_response():
         
         try:
             response = model.generate_content(
-            [file_path, "\n\n", "Can you generate 10 keywords and definitions from this file?"])
+            [file_path, "\n\n", f"Can you generate {count} keywords and definitions from this file?"])
             print(response.text)
             return response.text
         finally:
