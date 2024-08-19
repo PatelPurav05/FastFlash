@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import FileUploadComponent from './components/FileUpload/FileUploadComponent';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <p>
           TestChange
         </p>
+        <FileUploadComponent />
         <a
           className="App-link"
           href="https://reactjs.org"
