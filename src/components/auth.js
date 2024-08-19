@@ -1,11 +1,8 @@
 import { auth , googleProvider} from "../service/firebase";
-import { createUserWithEmailAndPassword,signInWithPopup, signOut } from "firebase/auth";
-import { useState } from "react";
+import {signInWithPopup, signOut } from "firebase/auth";
 import logo from '../components/web_light_rd_SI.svg'
 
 export const Auth = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
     console.log(auth?.currentUser?.email);
     console.log(auth?.currentUser?.photoURL);
   const signInWithGoogle = async () => {
@@ -24,7 +21,7 @@ export const Auth = () => {
   };
   return (
     <div>
-      <img src={logo} onClick={signInWithGoogle} />
+      <img className='transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg' src={logo} alt="sign-in" onClick={signInWithGoogle} />
     </div>
   );
 };
