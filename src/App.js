@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { auth } from './service/firebase';
 import { Routes, Route } from 'react-router-dom';
 import Flashcards from './pages/flashcards';
+import FlashcardSets from './components/FlashCardSets/FlashcardSets';
 
 // // Example components for different pages
 // import Home from './components/Home';
@@ -28,6 +29,10 @@ function App() {
           <Route 
             path="/upload" 
             element={user ? <Flashcards /> : <></>} 
+          />
+          <Route 
+            path="/flashcards" 
+            element={user ? <FlashcardSets /> : <></>} 
           />
           {/* <Route path="/profile" element={<Profile user={user} />} /> */}
           {/* Add more routes as needed */}
