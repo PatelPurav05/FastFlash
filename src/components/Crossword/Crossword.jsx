@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Crossword from '@jaredreisinger/react-crossword';
 import { auth, db } from '../../service/firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, createTheme, ThemeProvider } from '@mui/material';
 
 const crosswordTheme = {
   highlightBackground: 'rgb(156, 163, 175)' // Light yellow for highlighted cells
 };
+
+const theme = createTheme({
+    typography: {
+      fontFamily: 'Lexend'
+    }
+  })
 
 const CrosswordPuzzle = () => {
   const [data, setData] = useState(null); // Start with null to better handle conditional rendering
@@ -89,12 +95,13 @@ const CrosswordPuzzle = () => {
   return (
     <div style={{ margin: '20px' }}>
       <div style={{ padding: '20px' }}>
+      <ThemeProvider theme={theme}>
         <Typography 
           variant="h4" 
           component="h2" 
           gutterBottom 
           sx={{ 
-            fontFamily: 'Roboto, sans-serif', 
+            fontFamily: 'Lexend', 
             fontWeight: 700, 
             color: '#3f51b5', 
             textAlign: 'center',
@@ -138,7 +145,7 @@ const CrosswordPuzzle = () => {
                   fontSize: '1rem', // Smaller font size
                   fontWeight: 500,
                   color: '#333',
-                  fontFamily: 'Roboto, sans-serif',
+                  fontFamily: 'Lexend',
                   letterSpacing: '0.5px',
                 }}
               />
@@ -153,9 +160,10 @@ const CrosswordPuzzle = () => {
               component="h3" 
               sx={{ 
                 mt: 4, 
-                fontFamily: 'Roboto, sans-serif', 
+                fontSize: 100,
+                fontFamily: 'Lexend', 
                 fontWeight: 600, 
-                color: '#2c387e',
+                color: '#f7fee7',
                 textAlign: 'center',
               }}
             >
@@ -178,6 +186,7 @@ const CrosswordPuzzle = () => {
         {data && data.across && data.down && (
             <Crossword data={data} theme={crosswordTheme} />
         )}
+        </ThemeProvider>
       </div>
     </div>
   );
