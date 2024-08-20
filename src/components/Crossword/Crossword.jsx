@@ -3,6 +3,7 @@ import Crossword from '@jaredreisinger/react-crossword';
 import { auth, db } from '../../service/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { Box, Typography, List, ListItem, ListItemText, createTheme, ThemeProvider } from '@mui/material';
+import clg from 'crossword-layout-generator';
 
 const crosswordTheme = {
   highlightBackground: 'rgb(156, 163, 175)' // Light yellow for highlighted cells
@@ -20,6 +21,8 @@ const CrosswordPuzzle = () => {
   const [selectedSet, setSelectedSet] = useState(null);
   const [flashcards, setFlashcards] = useState([]);
   const [user, setUser] = useState(null);
+  const [correctAnswers, setCorrectAnswers] = useState([]);
+  const [isCrosswordCorrect, setIsCrosswordCorrect] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(setUser);
@@ -48,49 +51,56 @@ const CrosswordPuzzle = () => {
     setFlashcards(selected.cards || []); // Assuming flashcards are stored under 'cards'
   };
     
-  function generateCrosswordData(vocabulary) {
-    if (!vocabulary || vocabulary.length === 0) return null;
-
-    const gridSize = 13; // Define the grid size (e.g., 13x13)
+  const convertToCrosswordData = (layoutResult) => {
     const across = {};
     const down = {};
-    let currentNumber = 1;
 
-    vocabulary.forEach((item, index) => {
-      const direction = index % 2 === 0 ? 'across' : 'down';
-      const entry = {
-        clue: item.definition,
-        answer: item.word.toUpperCase(),
-        row: index, // Simplified positioning logic
-        col: 0, // Start at the first column or row
-      };
+    layoutResult.forEach((item, index) => {
+      const { clue, answer, startx, starty, orientation } = item;
+      const number = index + 1;
 
-      if (direction === 'across') {
-        across[currentNumber] = entry;
-      } else {
-        down[currentNumber] = entry;
+      if (orientation === 'across') {
+        across[number] = {
+          clue,
+          answer,
+          row: starty - 1, // Adjusting for 0-based indexing in grid
+          col: startx - 1, // Adjusting for 0-based indexing in grid
+        };
+      } else if (orientation === 'down') {
+        down[number] = {
+          clue,
+          answer,
+          row: starty - 1, // Adjusting for 0-based indexing in grid
+          col: startx - 1, // Adjusting for 0-based indexing in grid
+        };
       }
-
-      currentNumber += 1;
     });
 
-    return {
-      across,
-      down,
-    };
-  }
+    return { across, down };
+  };
 
   useEffect(() => {
     if (flashcards.length > 0) {
-      const crosswordData = generateCrosswordData(flashcards);
-      if (crosswordData) {
-        setData(crosswordData);
-        console.log("Generated Crossword Data:", crosswordData); // Log the data for debugging
-      } else {
-        setData(null); // Ensure data is null if no crossword data was generated
-      }
+      const input = flashcards.map(card => ({
+        clue: card.definition,
+        answer: card.word.toUpperCase(),
+      }));
+
+      const layout = clg.generateLayout(input);
+      const crosswordData = convertToCrosswordData(layout.result);
+      setData(crosswordData);
     }
   }, [flashcards]);
+
+  const handleCorrect = (direction, number, answer) => {
+    setCorrectAnswers((prev) => [...prev, { direction, number, answer }]);
+    console.log(`Correct answer: ${answer} for clue ${number} (${direction})`);
+  };
+
+  const handleCrosswordCorrect = () => {
+    setIsCrosswordCorrect(true);
+    console.log("Crossword completed correctly!");
+  };
 
   return (
     <div style={{ margin: '20px' }}>
@@ -184,7 +194,7 @@ const CrosswordPuzzle = () => {
         )}
 
         {data && data.across && data.down && (
-            <Crossword data={data} theme={crosswordTheme} />
+            <Crossword data={data} theme={crosswordTheme} onCorrect={handleCorrect} onCrosswordCorrect={handleCrosswordCorrect} />
         )}
         </ThemeProvider>
       </div>
