@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import FileUploadComponent from './components/FileUpload/FileUploadComponent';
+import { useState, useEffect } from 'react';
+import { Auth } from './components/auth';
+
 
 function App() {
   return (
@@ -10,6 +13,7 @@ function App() {
         <p>
           TestChange
         </p>
+        <Auth />
         <FileUploadComponent />
         <a
           className="App-link"
