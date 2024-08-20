@@ -4,6 +4,7 @@ import FileUploadComponent from './components/FileUpload/FileUploadComponent';
 import Navbar from './components/Navbar/Navbar';
 import { useState, useEffect } from 'react';
 import { auth } from './service/firebase';
+import HeroSection from './components/HeroSection';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -12,9 +13,12 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged(setUser);
     return () => unsubscribe();
   }, []);
+
   return (
-    <div className="App bg-gradient-to-r from-emerald-200 to-emerald-400 h-full">
+    <div>
+      {/* className="App bg-gradient-to-r from-emerald-200 to-emerald-400 h-full" */}
       <Navbar />
+      <HeroSection/>
        
       <header className="App-header">
         {user &&
