@@ -1,6 +1,7 @@
 import { auth , googleProvider} from "../service/firebase";
 import { createUserWithEmailAndPassword,signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
+import logo from '../components/web_light_rd_SI.svg'
 
 export const Auth = () => {
   const [email, setEmail] = useState("");
@@ -23,8 +24,7 @@ export const Auth = () => {
   };
   return (
     <div>
-      <button onClick={signInWithGoogle}> Signin with google</button>
-      <button onClick={logOut}> logOut</button>
+      <img src={logo} onClick={signInWithGoogle} />
     </div>
   );
 };

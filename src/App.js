@@ -10,7 +10,6 @@ function App() {
     <div className="App bg-gradient-to-r from-blue-400 to-purple-400 h-screen">
       <Navbar />
       <header className="App-header">
-        <Auth />
         <FileUploadComponent />
       </header>
     </div>
