@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tile from './Tile';
-import { Button, Box, Modal, Typography, styled, NativeSelect } from '@mui/material';
+import { Button, Box, Modal, Typography, styled, NativeSelect, TextField } from '@mui/material';
 
 import { quantum } from 'ldrs'
+import { auth, db } from '../../service/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 quantum.register()
 
 function FileUploadComponent() {
@@ -11,6 +13,14 @@ function FileUploadComponent() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [vocabCount, setVocabCount] = useState(10);
+  const [user, setUser] = useState(null);
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(setUser);
+    return () => unsubscribe();
+  }, []);
+
 
   const VisuallyHiddenInput = styled('input')({
     display: 'none',
@@ -41,6 +51,21 @@ function FileUploadComponent() {
       const data = await response.json();
       setVocab(data);
       console.log(data);
+
+      // const name = prompt("Enter a name for this set of flashcards:");
+
+      if (name) {
+        // Create a new document in the flashcards collection under the user's document
+        const flashcardsCollectionRef = collection(db, 'users', user.uid, 'flashcards');
+        await addDoc(flashcardsCollectionRef, {
+          name: name,
+          cards: data, // Save the flashcards data under 'cards'
+          createdAt: new Date(),
+        });
+        console.log('Flashcards set saved successfully');
+      } else {
+        console.log('Set name was not provided. Flashcards not saved.');
+      }
     } catch (error) {
       console.error('Error uploading file:', error);
       setVocab([]);
@@ -79,6 +104,22 @@ function FileUploadComponent() {
             Generate Vocab
           </Typography>
           <form onSubmit={(e) => {handleSubmit(e); handleClose();}}>
+          <Box 
+            sx={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+            }}
+          >
+            <TextField 
+              id="outlined-basic" 
+              label="Name" 
+              variant="outlined" 
+              size="small" 
+              sx={{ mb: 4 }} 
+              onChange={(event) => setName(event.target.value)} 
+            />
+          </Box>
             <Button
               variant="contained"
               component="label"

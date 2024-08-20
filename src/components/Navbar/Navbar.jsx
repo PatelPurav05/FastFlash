@@ -1,17 +1,18 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { auth } from '../../service/firebase';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { auth, db } from '../../service/firebase';
 import { Auth } from '../auth';
 import { useState, useEffect } from "react";
 import logo from './robotic-hand.png'
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Dashboard', href: '/', current: true },
+  { name: 'Flashcards', href: '/upload', current: false },
+//   { name: 'Projects', href: '#', current: false },
+//   { name: 'Calendar', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -22,9 +23,31 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(setUser);
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        await checkAndAddUserToFirestore(user);
+      } else {
+        setUser(null);
+      }
+    });
     return () => unsubscribe();
   }, []);
+
+  const checkAndAddUserToFirestore = async (user) => {
+    const userRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(userRef);
+
+    if (!docSnap.exists()) {
+      // User does not exist in Firestore, so add them
+      await setDoc(userRef, {
+        uid: user.uid,
+        name: user.displayName,
+        email: user.email,
+        createdAt: new Date(),
+      });
+    }
+  };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -54,8 +77,7 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    className={classNames('text-gray-300 hover:bg-gray-700 hover:text-white',
                       'rounded-md px-3 py-2 text-sm font-medium',
                     )}
                   >
