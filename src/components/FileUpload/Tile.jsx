@@ -15,7 +15,7 @@ function Tile({ word, definition }) {
                 <div
                     className={`absolute inset-0 bg-yellow-50 rounded-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl flex items-center justify-center ${flipped ? 'hidden' : 'block'}`}
                 >
-                    <h3 className="text-gray-800 text-lg font-semibold">{word}</h3>
+                    <h3 className="text-gray-800 text-4xl font-semibold">{word}</h3>
                 </div>
                     {/* Back Side */}
                 <div
