@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App bg-gradient-to-r from-emerald-200 to-emerald-400 h-full" >
+    <div className="App bg-gradient-to-r from-teal-400 to-teal-600 h-full" >
       <Navbar />
        
       <header className="App-header">
