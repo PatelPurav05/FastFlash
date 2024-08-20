@@ -25,11 +25,11 @@ function App() {
           <Route path="/" element={<HeroSection/>} />
           <Route 
             path="/upload" 
-            element={user ? <Flashcards /> : <></>} 
+            element={user ? <Flashcards /> : <h1 className='font-bold uppercase drop-shadow-lg'>Sign in to Create New Flashcards!</h1>} 
           />
           <Route 
             path="/flashcards" 
-            element={user ? <FlashcardSets /> : <></>} 
+            element={user ? <FlashcardSets /> : <h1 className='font-bold uppercase drop-shadow-lg'>Sign in to View Your Flashcards!</h1>} 
           />
           {/* <Route path="/profile" element={<Profile user={user} />} /> */}
           {/* Add more routes as needed */}
