@@ -10,8 +10,8 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
-  { name: 'Flashcards', href: '/upload', current: false },
-//   { name: 'Projects', href: '#', current: false },
+  { name: 'Create', href: '/upload', current: false },
+  { name: 'Flashcards', href: '/flashcards', current: false },
 //   { name: 'Calendar', href: '#', current: false },
 ]
 
