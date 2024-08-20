@@ -66,18 +66,19 @@ const CrosswordPuzzle = () => {
     layoutResult.forEach((item, index) => {
       const { clue, answer, startx, starty, orientation } = item;
       const number = index + 1;
+      const formattedAnswer = answer.replace(/\s+/g, '_');
 
       if (orientation === 'across') {
         across[number] = {
           clue,
-          answer,
+          answer: formattedAnswer,
           row: starty - 1,
           col: startx - 1,
         };
       } else if (orientation === 'down') {
         down[number] = {
           clue,
-          answer,
+          answer: formattedAnswer,
           row: starty - 1,
           col: startx - 1,
         };
