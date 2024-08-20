@@ -12,6 +12,7 @@ const navigation = [
   { name: 'Dashboard', href: '/', current: true },
   { name: 'Create', href: '/upload', current: false },
   { name: 'Flashcards', href: '/flashcards', current: false },
+  { name: 'Crossword', href: '/crossword', current: false },
 //   { name: 'Calendar', href: '#', current: false },
 ]
 

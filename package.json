@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.13.0",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
+    "@jaredreisinger/react-crossword": "^5.2.0",
     "@material-tailwind/react": "^2.1.9",
     "@mui/material": "^5.16.7",
     "@tanstack/virtual-core": "^3.9.0",
@@ -19,6 +20,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.12",
+    "ultimate-react-crossword": "^1.0.12",
     "web-vitals": "^2.1.4"
   },
   "overrides": {

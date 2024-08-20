@@ -7,6 +7,7 @@ import HeroSection from './components/HeroSection';
 import { Routes, Route } from 'react-router-dom';
 import Flashcards from './pages/flashcards';
 import FlashcardSets from './components/FlashCardSets/FlashcardSets';
+import Crossword from './pages/crossword';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,6 +31,10 @@ function App() {
           <Route 
             path="/flashcards" 
             element={user ? <FlashcardSets /> : <h1 className='font-bold uppercase drop-shadow-lg'>Sign in to View Your Flashcards!</h1>} 
+          />
+          <Route 
+            path="/crossword" 
+            element={user ? <Crossword /> : <h1 className='font-bold uppercase drop-shadow-lg'>Sign in to Try the Crossword Puzzle!</h1>} 
           />
           {/* <Route path="/profile" element={<Profile user={user} />} /> */}
           {/* Add more routes as needed */}
