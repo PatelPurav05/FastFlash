@@ -3,13 +3,10 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import { useState, useEffect } from 'react';
 import { auth } from './service/firebase';
+import HeroSection from './components/HeroSection';
 import { Routes, Route } from 'react-router-dom';
 import Flashcards from './pages/flashcards';
 import FlashcardSets from './components/FlashCardSets/FlashcardSets';
-
-// // Example components for different pages
-// import Home from './components/Home';
-// import Profile from './components/Profile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,7 +22,7 @@ function App() {
        
       <header className="App-header">
         <Routes>
-          <Route path="/" element={<></>} />
+          <Route path="/" element={<HeroSection/>} />
           <Route 
             path="/upload" 
             element={user ? <Flashcards /> : <></>} 
