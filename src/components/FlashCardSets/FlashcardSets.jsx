@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../service/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import Tile from '../FileUpload/Tile';
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Lexend'
+  }
+})
 
 const FlashcardSets = () => {
   const [sets, setSets] = useState([]);
@@ -39,12 +45,13 @@ const FlashcardSets = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <ThemeProvider theme={theme}>
       <Typography 
         variant="h4" 
         component="h2" 
         gutterBottom 
         sx={{ 
-          fontFamily: 'Roboto, sans-serif', 
+          fontFamily: "Lexend",
           fontWeight: 700, 
           color: '#3f51b5', 
           textAlign: 'center',
@@ -70,7 +77,7 @@ const FlashcardSets = () => {
               maxWidth: '400px', // Set a maximum width
               margin: '0 auto', // Center the tile horizontally
               borderRadius: '8px',
-              backgroundColor: 'background.paper',
+              backgroundColor: '#f7fee7',
               boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
               padding: 2,
               transition: 'transform 0.2s, box-shadow 0.2s',
@@ -88,7 +95,7 @@ const FlashcardSets = () => {
                 fontSize: '1rem', // Smaller font size
                 fontWeight: 500,
                 color: '#333',
-                fontFamily: 'Roboto, sans-serif',
+                fontFamily: "Lexend",
                 letterSpacing: '0.5px',
               }}
             />
@@ -103,10 +110,12 @@ const FlashcardSets = () => {
             component="h3" 
             sx={{ 
               mt: 4, 
-              fontFamily: 'Roboto, sans-serif', 
+              fontFamily: "Lexend",
               fontWeight: 600, 
-              color: '#2c387e',
+              color: '#f7fee7',
               textAlign: 'center',
+              textTransform: "capitalize",
+              fontSize: 100
             }}
           >
             {selectedSet.name}
@@ -125,6 +134,8 @@ const FlashcardSets = () => {
           </Box>
         </div>
       )}
+            </ThemeProvider>
+
     </div>
   );
 };

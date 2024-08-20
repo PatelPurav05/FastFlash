@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Tile from './Tile';
-import { Button, Box, Modal, Typography, styled, NativeSelect, TextField } from '@mui/material';
+import { Button, Box, Modal, Typography, styled, NativeSelect, TextField, createTheme, ThemeProvider } from '@mui/material';
 
 import { quantum } from 'ldrs'
 import { auth, db } from '../../service/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 quantum.register()
+
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Lexend'
+  }
+})
 
 function FileUploadComponent() {
   const [file, setFile] = useState(null);
@@ -80,6 +87,7 @@ function FileUploadComponent() {
 
   return (
     <div>
+            <ThemeProvider theme={theme}>
       {!loading &&
         <Button variant="contained" onClick={handleOpen} sx={{ backgroundColor: '#31416b', color: 'white' }}>
           Upload File
@@ -185,6 +193,7 @@ function FileUploadComponent() {
           ))}
         </Box>
       )}
+      </ThemeProvider>
     </div>
   );
 }
