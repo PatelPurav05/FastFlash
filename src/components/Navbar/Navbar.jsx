@@ -3,6 +3,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { auth } from '../../service/firebase';
 import { Auth } from '../auth';
 import { useState, useEffect } from "react";
+import logo from './robotic-hand.png'
 
 
 
@@ -42,7 +43,7 @@ export default function Navbar() {
             <div className="flex flex-shrink-0 items-center">
               <img
                 alt="Your Company"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src={logo}
                 className="h-8 w-auto"
               />
             </div>
