@@ -1,3 +1,17 @@
+# Welcome to Cloud Functions for Firebase for Python!
+# To get started, simply uncomment the below code or create your own.
+# Deploy with `firebase deploy`
+
+from firebase_functions import https_fn
+from firebase_admin import initialize_app
+
+# initialize_app()
+#
+#
+# @https_fn.on_request()
+# def on_request_example(req: https_fn.Request) -> https_fn.Response:
+#     return https_fn.Response("Hello world!")
+
 import time
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -5,6 +19,7 @@ import google.generativeai as genai
 import os
 import typing_extensions as typing
 from werkzeug.utils import secure_filename
+import functions_framework
 
 class Definitions(typing.TypedDict):
   word: str
@@ -56,3 +71,4 @@ def get_gemini_response(count):
             if os.path.exists(file_path):
                 os.remove(file_path)
 
+functions_framework.http('app', app)
