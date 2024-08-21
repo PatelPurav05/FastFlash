@@ -7,9 +7,10 @@ import clg from 'crossword-layout-generator';
 
 
 const crosswordTheme = {
-  highlightBackground: 'rgb(156, 163, 175)' // Light yellow for highlighted cells
+  highlightBackground: '#3f51b5' // highlighted cells
 };
 
+// rgb(156, 163, 175)
 const theme = createTheme({
     typography: {
       fontFamily: 'Lexend'
@@ -25,7 +26,9 @@ const CrosswordPuzzle = () => {
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [isCrosswordCorrect, setIsCrosswordCorrect] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
+  const [openInsPopup, setOpenInsPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+  const [popupInsMessage, setPopupInsMessage] = useState('Choose a Flashcard set from above and fill out the crossword. If a word has a blank space, type an underscore.');
   const crosswordRef = useRef(null);
   const [snackbar, setSnackbar] = React.useState(null);
 
@@ -128,6 +131,10 @@ const CrosswordPuzzle = () => {
     setOpenPopup(false);
   };
 
+  const handleInsClosePopup = () => {
+    setOpenInsPopup(false);
+  };
+
   return (
     <div style={{ margin: '20px' }}>
       <div style={{ padding: '20px' }}>
@@ -188,6 +195,8 @@ const CrosswordPuzzle = () => {
               </ListItem>
             ))}
           </List>
+          
+          <Button onClick={() => {setOpenInsPopup(true)}} variant='contained' sx={{marginTop: 3}}>Instructions</Button>
 
           {selectedSet && (
             <div>
@@ -220,6 +229,26 @@ const CrosswordPuzzle = () => {
           {data && data.across && data.down && (
               <Crossword ref={crosswordRef} data={data} theme={crosswordTheme} onCorrect={handleCorrect} onCrosswordCorrect={handleCrosswordCorrect} />
           )}
+
+{/* Instructions */}
+          <Dialog
+            open={openInsPopup}
+            onClose={handleInsClosePopup}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Instructions"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                {popupInsMessage}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleInsClosePopup} color="primary" autoFocus>
+                CLOSE
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           {/* Popup Dialog */}
           <Dialog
