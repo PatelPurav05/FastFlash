@@ -1,2 +1,25 @@
-buildCommand: npm run build
-publishDir: build
+services:
+  - type: web
+    name: backend
+    env: docker
+    dockerfilePath: ./src/backend/Dockerfile
+    buildCommand: "" # Optional if your Dockerfile already handles building
+    startCommand: "" # Optional if your Dockerfile already handles starting the service
+    envFile: .env
+    autoDeploy: true
+    plan: free # or another plan like `starter`, `standard`
+    serviceDetails:
+      ports:
+        - port: 5000
+
+  - type: web
+    name: frontend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    buildCommand: "" # Optional if your Dockerfile already handles building
+    startCommand: "" # Optional if your Dockerfile already handles starting the service
+    autoDeploy: true
+    plan: free # or another plan like `starter`, `standard`
+    serviceDetails:
+      ports:
+        - port: 3000
