@@ -10,7 +10,6 @@ const crosswordTheme = {
   highlightBackground: '#3f51b5' // highlighted cells
 };
 
-// rgb(156, 163, 175)
 const theme = createTheme({
     typography: {
       fontFamily: 'Lexend'
