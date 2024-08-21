@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# FastFlash 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+FastFlash is an innovative web platform designed to empower students in their academic journey by making study sessions more engaging and effective. The platform combines the traditional benefits of flashcards with a modern twist—an interactive crossword game—creating a comprehensive learning experience tailored for students aiming to reach their academic goals. Some key features include: customizable flashcards, pdf to flashcard conversion, and interactive crossword game. Students need to sign into the platform to create customized flashcards. Users can upload PDF notes directly to the platform. With the help of the Gemini API, the content is intelligently parsed and transformed into organized flashcard sets, saving users time and effort in manual creation. This feature allows students to efficiently convert their notes into personalized study aids. With the storage aspect of Firebase, these flashcards are saved to their account for future use. What sets FastFlash apart is the unique learning experience offered through an interactive crossword game. The game is designed to reinforce key concepts from users' flashcard sets in a fun and engaging manner, turning study sessions into an active learning challenge. The crossword game is dynamically generated from the content of flashcard sets, helping users retain information in an entertaining way. The interactive crossword game and the ability to turn notes into personalized flashcards in order to help students get a better understanding of their studies is what makes FastFlash unique. We used React for the frontend, and Flask for the backend. We stored information in Firebase and used the Gemini API to convert text to flashcards.
+## Setup
 
-## Available Scripts
+### Global `.env` File
+The global `.env` file is used to store all of the environment variables necessary for the Docker Container and Flask App.  
+  
+The global `.env` file should contain the following variables:
+1. `API_KEY` - Firebase API Key
 
-In the project directory, you can run:
+### Dependencies
+##### If you are using Docker, you can skip this step, since the Docker scripts will automatically install all dependencies.  
+#### Flask Backend Dependencies
+To install all the dependencies required for the backend of this project, ensure you have `pip` installed. Then, navigate to the `backend` directory and run the following command in your terminal:  
+  
+`pip install -r requirements.txt`  
+#### React Frontend Dependencies
+To install all React dependencies, ensure you have Node.js and npm (Node Package Manager) installed. Then, navigate to the root directory run the following command in your terminal:  
+  
+`npm install`  
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Running The Project
+### Use Docker
+To run the project using Docker, ensure that you have Docker installed. Then, from the root directory of the project, run the following command in your terminal:  
+  
+`docker-compose up --build`  
+  
+This command will build and run all of the docker images required for this project.  
+  
+### Manual Startup
+For manual startup, ensure that you have all of the dependencies installed and run the following commands:  
+1. Next, navigate to your `backend` directory and run the following command:
+     
+   `flask run`
+     
+   By default, this should run on port 5000.
+2. Finally, to start your React app, navigate to the root directory and run:
+  
+   `npm start`
+     
+#### Now, you should be good to go! Please navigate to the React application (generally available at http://localhost:3000) to use the project.
